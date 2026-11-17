@@ -468,6 +468,30 @@ footer{
 .ai-modal-content { font-size: 0.95rem; line-height: 1.6; color: var(--ink2); }
 
 button.skill-tag { background: transparent; cursor: none; font-family: inherit; }
+
+/* ── Language switcher ── */
+.lang-btn{
+  position:relative;display:inline-flex;align-items:center;
+  padding:3px;border:1px solid var(--rule);border-radius:999px;
+  background:transparent;cursor:none;font-family:var(--sans);
+  transition:border-color .2s;
+}
+.lang-btn:hover{border-color:var(--ink)}
+.lang-thumb{
+  position:absolute;top:3px;bottom:3px;left:3px;width:2.4rem;
+  border-radius:999px;background:var(--ink);
+  transition:transform .3s cubic-bezier(.4,0,.2,1);
+}
+.lang-btn[data-lang="en"] .lang-thumb{transform:translateX(100%)}
+.lang-opt{
+  position:relative;z-index:1;width:2.4rem;padding:.3rem 0;text-align:center;
+  font-size:.7rem;letter-spacing:.1em;font-weight:500;color:var(--ink2);
+  transition:color .25s;
+}
+.lang-btn[data-lang="th"] .lang-opt:nth-child(2),
+.lang-btn[data-lang="en"] .lang-opt:nth-child(3){color:var(--white)}
+.mobile-menu .lang-btn .lang-thumb,.mobile-menu .lang-btn .lang-opt{width:3.2rem}
+.mobile-menu .lang-btn .lang-opt{font-size:.85rem;padding:.45rem 0}
 </style>
 </head>
 <body>
@@ -493,6 +517,7 @@ button.skill-tag { background: transparent; cursor: none; font-family: inherit; 
     <li><a href="#projects">Projects</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#contact">Contact</a></li>
+    <li><button class="lang-btn" type="button" onclick="toggleLang()" aria-label="Change language"><span class="lang-thumb"></span><span class="lang-opt">TH</span><span class="lang-opt">EN</span></button></li>
   </ul>
   <button class="hamburger" id="hamburger" aria-label="menu">
     <span></span><span></span><span></span>
@@ -504,23 +529,24 @@ button.skill-tag { background: transparent; cursor: none; font-family: inherit; 
   <a href="#projects" class="mob-link">Projects</a>
   <a href="#about" class="mob-link">About</a>
   <a href="#contact" class="mob-link">Contact</a>
+  <button class="lang-btn" type="button" onclick="toggleLang()" aria-label="Change language"><span class="lang-thumb"></span><span class="lang-opt">TH</span><span class="lang-opt">EN</span></button>
 </div>
 
 <!-- HERO -->
 <section id="hero">
   <div class="hero-layout">
     <div class="hero-content">
-      <p class="hero-tag">วิศวกรไฟฟ้า · Electrical Engineer</p>
+      <p class="hero-tag" data-i18n="heroTag">วิศวกรไฟฟ้า · Electrical Engineer</p>
       <h1 class="hero-h1">
         Hi, I'm <em>Anantaweep<br>Jantapim</em> —
       </h1>
-      <p class="hero-sub">
+      <p class="hero-sub" data-i18n="heroSub">
         นักศึกษาวิศวกรรมไฟฟ้าที่หลงใหลในระบบ Embedded, Power Electronics
         และการสร้างสิ่งที่ซับซ้อนให้ดูเรียบง่าย
       </p>
       <div class="hero-actions">
-        <a href="#projects" class="btn btn-dark">ดูผลงาน</a>
-        <a href="#about" class="btn btn-outline">เกี่ยวกับฉัน</a>
+        <a href="#projects" class="btn btn-dark" data-i18n="btnWork">ดูผลงาน</a>
+        <a href="#about" class="btn btn-outline" data-i18n="btnAbout">เกี่ยวกับฉัน</a>
       </div>
     </div>
     
@@ -548,30 +574,30 @@ button.skill-tag { background: transparent; cursor: none; font-family: inherit; 
     <a href="https://a-eosin-kappa-56.vercel.app/" class="proj-row reveal">
       <div class="proj-idx">01</div>
       <div class="proj-body">
-        <div class="proj-name">อบรมหลักสูตรด้านวิทยาการพลังงานสำหรับนักศึกษา รุ่นที่ 9</div>
+        <div class="proj-name" data-i18n="p1Name">อบรมหลักสูตรด้านวิทยาการพลังงานสำหรับนักศึกษา รุ่นที่ 9</div>
         <div class="proj-tags">
-          <span class="proj-tag">ดูงานโรงไฟฟ้าพลังงานก๊าซธรรมชาติ</span>
-          <span class="proj-tag">เยี่ยมชม OR Academy</span>
+          <span class="proj-tag" data-i18n="p1Tag1">ดูงานโรงไฟฟ้าพลังงานก๊าซธรรมชาติ</span>
+          <span class="proj-tag" data-i18n="p1Tag2">เยี่ยมชม OR Academy</span>
           <!-- <span class="proj-tag">Power Electronics</span> -->
         </div>
       </div>
-      <button class="ai-btn" onclick="showExplanation(event, 'อบรมหลักสูตรด้านวิทยาการพลังงานสำหรับนักศึกษา รุ่นที่ 9', '5 วันกับ วพศ. รุ่น 9 ผมได้ไปดูงานตั้งแต่โรงไฟฟ้า คลังน้ำมัน ไปจนถึงสายการผลิตกาแฟ ได้ทำงานกลุ่มกับเพื่อนต่างสาขา และได้ฟังเรื่องพลังงานหมุนเวียนจาก Huawei หน้านี้รวมใบเซอร์ ภาพบรรยากาศ และสิ่งที่ได้กลับมา')">💡คำอธิบาย</button>
-      <div class="proj-year">2025</div>
+      <button class="ai-btn" onclick="showExplanation(event, 'อบรมหลักสูตรด้านวิทยาการพลังงานสำหรับนักศึกษา รุ่นที่ 9', '5 วันกับ วพศ. รุ่น 9 ผมได้ไปดูงานตั้งแต่โรงไฟฟ้า คลังน้ำมัน ไปจนถึงสายการผลิตกาแฟ ได้ทำงานกลุ่มกับเพื่อนต่างสาขา และได้ฟังเรื่องพลังงานหมุนเวียนจาก Huawei หน้านี้รวมใบเซอร์ ภาพบรรยากาศ และสิ่งที่ได้กลับมา')" data-i18n="explain">💡คำอธิบาย</button>
+      <div class="proj-year">2026</div>
       <div class="proj-arrow">↗</div>
     </a>
 
     <a href="#" class="proj-row reveal">
       <div class="proj-idx">02</div>
       <div class="proj-body">
-        <div class="proj-name">Smart Home Automation</div>
+        <div class="proj-name" data-i18n="p2Name"> BOI STEM หลักสูตร เทคนิคการตรวจวัดสัญญาณเซนเซอร์และการแก้ปัญหา ECU ในยานยนต์สมัยใหม่</div>
         <div class="proj-tags">
-          <span class="proj-tag">ESP32</span>
-          <span class="proj-tag">MQTT</span>
-          <span class="proj-tag">Node-RED</span>
+          <span class="proj-tag" data-i18n="p2Tag1">เทคนิคการตรวจวัดสัญญาณเซนเซอร์</span>
+          <span class="proj-tag" data-i18n="p2Tag2">การแก้ปัญหา ECU</span>
+          <!-- <span class="proj-tag">Node-RED</span> -->
         </div>
       </div>
-      <button class="ai-btn" onclick="showExplanation(event, 'Smart Home Automation', 'ระบบบ้านอัจฉริยะที่สั่งการและดูสถานะผ่านอินเทอร์เน็ตได้ ใช้บอร์ด ESP32 เป็นศูนย์กลางในการเชื่อมต่อเครื่องใช้ไฟฟ้า และสร้างหน้าจอควบคุม (Dashboard) ให้ผู้ใช้กดสั่งงานได้ง่ายๆ')">💡 อธิบายแบบเข้าใจง่าย</button>
-      <div class="proj-year">2025</div>
+      <button class="ai-btn" onclick="showExplanation(event, ' BOI STEM หลักสูตร เทคนิคการตรวจวัดสัญญาณเซนเซอร์และการแก้ปัญหา ECU ในยานยนต์สมัยใหม่', 'โครงการนี้เน้นการเรียนรู้ทางเทคนิคการตรวจวัดสัญญาณเซนเซอร์และการแก้ปัญหา ECU ในยานยนต์สมัยใหม่ ผ่านการปฏิบัติจริงและทฤษฎี')" data-i18n="explain">💡 คำอธิบาย</button>
+      <div class="proj-year">2026</div>
       <div class="proj-arrow">↗</div>
     </a>
 
@@ -617,11 +643,11 @@ button.skill-tag { background: transparent; cursor: none; font-family: inherit; 
         Engineering <em>student</em><br>& tech enthusiast.
       </h2>
       <div class="about-body reveal">
-        <p>
-          ฉันเป็น <strong>นักศึกษาวิศวกรรมไฟฟ้า</strong> ที่มีความสนใจในระบบ Embedded,
-          Power Electronics, Solar panel, EVcar และ Automation ชื่นชอบการแก้ปัญหาที่ซับซ้อนด้วยวิธีที่งดงาม
+        <p data-i18n="about1">
+          <strong>นักศึกษาวิศวกรรมไฟฟ้า</strong> ที่มีความสนใจในระบบพลังงานหมุนเวียน,
+          Power Electronics, Solar panel, EVcar และ Automation ชื่นชอบการแก้ปัญหาที่ซับซ้อนด้วยวิธีที่เรียบง่ายและมีประสิทธิภาพ
         </p>
-        <p>ปัจจุบันกำลังทำโปรเจค <strong>P2P Energy Market (SUT Dynamic Trading in Smart Grid )</strong> โดยจะสร้างระบบจับคู่ที่พัฒนามาจากระบบ BID-SELL และจำลองการเปรียบเทียบจำนวน 5 กรณีเปรียบเทียบ</p>
+        <p data-i18n="about2">ปัจจุบันกำลังทำโปรเจค <strong>P2P Energy Market (SUT Dynamic Trading in Smart Grid )</strong> โดยจะสร้างระบบจับคู่ที่พัฒนามาจากระบบ BID-SELL และจำลองการเปรียบเทียบจำนวน 5 กรณีเปรียบเทียบ</p>
       </div>
     </div>
     <div class="about-right reveal">
@@ -646,9 +672,9 @@ button.skill-tag { background: transparent; cursor: none; font-family: inherit; 
         <div class="edu-item">
           <div>
             <div class="edu-name">B.Eng. Electrical Engineering</div>
-            <div class="edu-meta" style="margin-top:.2rem">มหาวิทยาลัยเทคโนโลยีสุรนารี (มทส.)</div>
+            <div class="edu-meta" style="margin-top:.2rem" data-i18n="uni">มหาวิทยาลัยเทคโนโลยีสุรนารี (มทส.)</div>
           </div>
-          <div class="edu-meta">2024 – ปัจจุบัน (ปี 3)</div>
+          <div class="edu-meta" data-i18n="eduYear">2024 – ปัจจุบัน (ปี 3)</div>
         </div>
       </div>
     </div>
@@ -671,7 +697,7 @@ button.skill-tag { background: transparent; cursor: none; font-family: inherit; 
   <div class="footer-bottom">
     <div class="footer-links">
       <a href="https://github.com/mastersag96">GitHub</a>
-      <a href="#">LinkedIn</a>
+      <a href="https://www.linkedin.com/in/kingmaster-sag-312648450/">LinkedIn</a>
       <a href="#">Resume</a>
     </div>
     <span class="footer-copy">© 2026 — Anantaweep Jantapim</span>
@@ -728,10 +754,61 @@ aiModalClose.addEventListener('click', () => {
 // เปลี่ยนเป็นการแสดงข้อมูลทันทีโดยไม่ต้องเรียก API
 function showExplanation(e, projectName, description) {
   e.preventDefault(); // ป้องกันการเปลี่ยนหน้าของลิงก์
+  if (currentLang === 'en') {
+    const m = MODAL_EN[projectName.replace(/\s+/g,' ').trim()];
+    if (m) { projectName = m[0]; description = m[1]; }
+  }
   aiModal.classList.add('active');
   aiModalTitle.innerText = `💡 ${projectName}`;
   aiModalContent.innerHTML = `<span style="color:var(--ink)">${description}</span>`;
 }
+
+// ── Language switcher (TH / EN) ──
+const I18N_EN = {
+  heroTag: 'Electrical Engineer',
+  heroSub: 'An electrical engineering student passionate about Embedded systems, Power Electronics, and making complex things look simple.',
+  btnWork: 'View Work',
+  btnAbout: 'About Me',
+  p1Name: 'Energy Science Training Program for Students, Batch 9',
+  p1Tag1: 'Natural Gas Power Plant Visit',
+  p1Tag2: 'OR Academy Visit',
+  p2Name: 'BOI STEM Course: Sensor Signal Measurement Techniques and ECU Troubleshooting in Modern Vehicles',
+  p2Tag1: 'Sensor Signal Measurement',
+  p2Tag2: 'ECU Troubleshooting',
+  explain: '💡 Description',
+  about1: '<strong>Electrical engineering student</strong> interested in renewable energy systems, Power Electronics, Solar panels, EVs and Automation. I enjoy solving complex problems in simple and efficient ways.',
+  about2: 'Currently working on the <strong>P2P Energy Market (SUT Dynamic Trading in Smart Grid)</strong> project, building a matching system developed from the BID-SELL mechanism and simulating 5 comparison cases.',
+  uni: 'Suranaree University of Technology (SUT)',
+  eduYear: '2024 – Present (3rd year)'
+};
+const MODAL_EN = {
+  'อบรมหลักสูตรด้านวิทยาการพลังงานสำหรับนักศึกษา รุ่นที่ 9': ['Energy Science Training Program for Students, Batch 9', '5 days with the Energy Science Program (Batch 9): I visited everything from a power plant and an oil depot to a coffee production line, worked in groups with students from other fields, and learned about renewable energy from Huawei. This page includes the certificate, photos from the trip, and what I took away.'],
+  'BOI STEM หลักสูตร เทคนิคการตรวจวัดสัญญาณเซนเซอร์และการแก้ปัญหา ECU ในยานยนต์สมัยใหม่': ['BOI STEM Course: Sensor Signal Measurement and ECU Troubleshooting', 'This course focuses on technical skills in measuring sensor signals and troubleshooting the ECU in modern vehicles, through both hands-on practice and theory.'],
+  'ทักษะ: Power Systems': ['Skill: Power Systems', 'Analysis and design of electrical power systems, including power grids, so that power delivery is stable and safe.'],
+  'ทักษะ: Circuit Design': ['Skill: Circuit Design', 'Calculating and designing electronic circuits, and choosing suitable components so the circuit works as intended.'],
+  'ทักษะ: PCB Layout': ['Skill: PCB Layout', 'Placing components and designing copper traces on a printed circuit board (PCB), ready for actual manufacturing.'],
+  'ทักษะ: MATLAB': ['Skill: MATLAB', 'Using advanced mathematical computing software to analyze equations and solve complex engineering problems.'],
+  'ทักษะ: ESP32': ['Skill: ESP32', 'Developing IoT (Internet of Things) devices with a chip that has built-in Wi-Fi and Bluetooth.'],
+  'ทักษะ: Python': ['Skill: Python', 'General-purpose programming for data handling, automation scripts, and even artificial intelligence (AI) processing.'],
+  'ทักษะ: AI Agentic': ['Skill: AI Agentic', 'Working with AI (Claude) to analyze code, generate ideas, and solve engineering problems quickly and efficiently.']
+};
+let currentLang = 'th';
+const i18nEls = document.querySelectorAll('[data-i18n]');
+i18nEls.forEach(el => { el.dataset.th = el.innerHTML; }); // keep original Thai text
+function setLang(lang) {
+  currentLang = lang;
+  i18nEls.forEach(el => {
+    el.innerHTML = lang === 'en' ? I18N_EN[el.dataset.i18n] : el.dataset.th;
+  });
+  document.documentElement.lang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => { b.dataset.lang = lang; });
+  aiModal.classList.remove('active');
+  try { localStorage.setItem('lang', lang); } catch (err) {}
+}
+function toggleLang() { setLang(currentLang === 'th' ? 'en' : 'th'); }
+let savedLang = 'th';
+try { savedLang = localStorage.getItem('lang') || 'th'; } catch (err) {}
+setLang(savedLang === 'en' ? 'en' : 'th');
 </script>
 </body>
 </html>
